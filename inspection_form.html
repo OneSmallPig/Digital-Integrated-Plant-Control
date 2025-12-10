@@ -37,7 +37,7 @@
       <button onclick="history.back()" class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
-      <div class="text-sm font-semibold text-slate-900">巡检表单 · 1#纺纱线</div>
+      <div class="text-sm font-semibold text-slate-900">巡检表单 · 白班 · 1#纺纱线</div>
       <button class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs">
         <i class="fa-solid fa-ellipsis"></i>
       </button>
@@ -45,14 +45,14 @@
 
     <!-- 内容区 -->
     <div class="flex-1 overflow-y-auto px-4 pb-20 bg-gradient-to-b from-emerald-50/80 to-white space-y-3">
-      <!-- 工序步骤导航 -->
+      <!-- 班次与工序步骤导航 -->
       <div class="bg-white rounded-2xl border border-emerald-100 p-3">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-1.5">
             <i class="fa-solid fa-diagram-project text-emerald-500 text-xs"></i>
             <span class="text-xs font-medium text-slate-800">当前工序：开清棉</span>
           </div>
-          <span class="text-[11px] text-slate-500">班次：白班</span>
+          <span class="text-[11px] text-slate-500">班次：白班 · 巡检人：张三</span>
         </div>
         <div class="flex items-center gap-1.5 flex-wrap">
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-primary text-white">开清棉</span>
@@ -63,12 +63,34 @@
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">细纺</span>
           <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">络筒</span>
         </div>
+        <div class="mt-2 flex items-center justify-between text-[11px] text-slate-600">
+          <span>本班该工序需巡检机器：<span class="text-emerald-600 font-semibold">2</span> 台</span>
+          <span>当前机器：<span class="text-emerald-600 font-semibold">KQ-01-A</span></span>
+        </div>
+      </div>
+
+      <!-- 当前工序的机器切换 -->
+      <div class="bg-white rounded-2xl border border-emerald-100 p-3 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-800">开清棉 · 机器选择</span>
+          <span class="text-[11px] text-slate-500">已完成 1 / 2 台</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button class="flex-1 px-2 py-1.5 rounded-xl bg-primary text-white text-[11px] text-left">
+            <div>KQ-01-A · 1#开清棉机</div>
+            <div class="text-[10px] text-emerald-50/90">状态：录入中 · 指标 4/6</div>
+          </button>
+          <button class="flex-1 px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-800 text-[11px] text-left">
+            <div>KQ-02-A · 2#开清棉机</div>
+            <div class="text-[10px] text-slate-500">状态：未巡检 · 指标 0/6</div>
+          </button>
+        </div>
       </div>
 
       <!-- 指标表单 -->
       <div class="bg-white rounded-2xl border border-emerald-100">
         <div class="px-3 pt-3 pb-2 flex items-center justify-between">
-          <span class="text-xs font-medium text-slate-800">关键运行指标（开清棉）</span>
+          <span class="text-xs font-medium text-slate-800">关键运行指标（开清棉 · KQ-01-A）</span>
           <span class="text-[11px] text-slate-500">必填 4 / 6</span>
         </div>
         <div class="divide-y divide-slate-100 text-[11px]">
