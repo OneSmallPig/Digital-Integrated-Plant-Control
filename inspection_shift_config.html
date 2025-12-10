@@ -114,6 +114,12 @@
       <!-- 预留空白，弹层在页面上方显示 -->
     </div>
 
+    <!-- 保存成功提示 Toast -->
+    <div id="saveToast" class="absolute top-16 left-1/2 -translate-x-1/2 z-30 px-3 py-1.5 rounded-full bg-emerald-500 text-white text-[11px] shadow-md flex items-center gap-1.5 hidden">
+      <i class="fa-solid fa-check-circle text-[12px]"></i>
+      <span>保存成功</span>
+    </div>
+
     <!-- 车间新增/编辑弹层 -->
     <div id="workshopModal" class="absolute inset-0 bg-black/30 flex items-center justify-center px-6 z-20 hidden">
       <div class="w-full rounded-3xl bg-white shadow-xl border border-emerald-100 p-4 text-[11px]">
@@ -147,7 +153,7 @@
           <span class="text-[10px] text-slate-500">实际小程序中可支持更多字段与校验。</span>
           <div class="flex items-center gap-2">
             <button onclick="closeWorkshopModal()" class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600">取消</button>
-            <button class="px-3 py-1.5 rounded-full bg-primary text-white">保存</button>
+            <button onclick="handleSave()" class="px-3 py-1.5 rounded-full bg-primary text-white">保存</button>
           </div>
         </div>
       </div>
@@ -236,7 +242,7 @@
             </label>
             <div class="flex items-center gap-2">
               <button class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600">重置</button>
-              <button class="px-3 py-1.5 rounded-full bg-primary text-white">保存班次</button>
+              <button onclick="handleSave()" class="px-3 py-1.5 rounded-full bg-primary text-white">保存班次</button>
             </div>
           </div>
         </div>
@@ -283,6 +289,19 @@
     }
     function closeShiftTemplateModal() {
       document.getElementById('shiftTemplateModal').classList.add('hidden');
+    }
+    function handleSave() {
+      // 关闭所有弹层
+      closeWorkshopModal();
+      closeShiftTemplateModal();
+      // 显示保存成功提示
+      var toast = document.getElementById('saveToast');
+      if (!toast) return;
+      toast.classList.remove('hidden');
+      // 短暂展示后自动隐藏
+      setTimeout(function () {
+        toast.classList.add('hidden');
+      }, 1500);
     }
   </script>
 </body>
