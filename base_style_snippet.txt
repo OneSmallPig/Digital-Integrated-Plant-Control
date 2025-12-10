@@ -1,0 +1,18 @@
+通用说明：
+- 所有 HTML 页面均使用相同的手机容器结构：
+  - 外层：`body` 使用 `bg-slate-100 flex items-center justify-center min-h-screen`.
+  - 手机壳容器：`div` 使用 `w-[393px] h-[852px] bg-gradient-to-b from-emerald-50 to-white rounded-[40px] shadow-[0_20px_60px_rgba(15,118,110,0.35)] border border-emerald-100 overflow-hidden relative`.
+  - 顶部状态栏：高度 ~ 40px，左侧时间、中间空、右侧信号/Wi-Fi/电量（FontAwesome 图标）。
+  - 导航栏：标题居中，左侧可选返回按钮，右侧可选操作按钮。
+  - 内容区：`flex-1 overflow-y-auto bg-gradient-to-b from-emerald-50/60 to-white px-4 pb-20`.
+  - 底部 TabBar：固定在容器底部，高度 ~ 60px，5 个 tab：`首页`、`巡检`、`看板`、`报表`、`我的`。
+- 配色：
+  - 主绿色：`#16a34a` / `emerald-600`
+  - 浅主色背景：`emerald-50` / `emerald-100`
+  - 强调色：`#22c55e` / `emerald-500`
+  - 工业中性色：`slate-600` / `slate-800`
+- 字体与圆角：
+  - 全局 `font-sans`，卡片 `rounded-2xl`，输入框 `rounded-xl`。
+  - 按钮使用 Tailwind 的渐变背景或纯色主绿。
+
+该文件仅为人类说明，不被页面引用。

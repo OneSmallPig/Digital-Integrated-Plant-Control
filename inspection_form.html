@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>巡检表单 - 彩诗禾-数字一体化厂区管控平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#16a34a',
+            primaryLight: '#dcfce7',
+            primarySoft: '#ecfdf3'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-slate-100 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] bg-gradient-to-b from-emerald-50 to-white rounded-[40px] shadow-[0_20px_60px_rgba(16,185,129,0.45)] border border-emerald-100 overflow-hidden relative flex flex-col">
+    <!-- 状态栏 -->
+    <div class="h-11 px-4 flex items-center justify-between text-xs text-slate-700">
+      <div class="font-semibold">9:41</div>
+      <div class="flex items-center gap-1.5">
+        <i class="fa-solid fa-signal"></i>
+        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-battery-full"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="px-4 pb-2 flex items-center justify-between">
+      <button onclick="history.back()" class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div class="text-sm font-semibold text-slate-900">巡检表单 · 1#纺纱线</div>
+      <button class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs">
+        <i class="fa-solid fa-ellipsis"></i>
+      </button>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="flex-1 overflow-y-auto px-4 pb-20 bg-gradient-to-b from-emerald-50/80 to-white space-y-3">
+      <!-- 工序步骤导航 -->
+      <div class="bg-white rounded-2xl border border-emerald-100 p-3">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-1.5">
+            <i class="fa-solid fa-diagram-project text-emerald-500 text-xs"></i>
+            <span class="text-xs font-medium text-slate-800">当前工序：开清棉</span>
+          </div>
+          <span class="text-[11px] text-slate-500">班次：白班</span>
+        </div>
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-primary text-white">开清棉</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">梳棉</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">并条</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">精梳</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">粗纺</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">细纺</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">络筒</span>
+        </div>
+      </div>
+
+      <!-- 指标表单 -->
+      <div class="bg-white rounded-2xl border border-emerald-100">
+        <div class="px-3 pt-3 pb-2 flex items-center justify-between">
+          <span class="text-xs font-medium text-slate-800">关键运行指标（开清棉）</span>
+          <span class="text-[11px] text-slate-500">必填 4 / 6</span>
+        </div>
+        <div class="divide-y divide-slate-100 text-[11px]">
+          <div class="px-3 py-2 flex items-center justify-between">
+            <div>
+              <div class="text-slate-800 font-medium">主电机电流</div>
+              <div class="text-[10px] text-slate-500">合理范围：10 ~ 18 A</div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <input type="number" inputmode="decimal" class="w-16 h-8 rounded-lg border border-emerald-100 text-right px-1.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-primary" placeholder="--" value="15.2" />
+              <span class="text-slate-500">A</span>
+            </div>
+          </div>
+          <div class="px-3 py-2 flex items-center justify-between">
+            <div>
+              <div class="text-slate-800 font-medium">喂入棉重量</div>
+              <div class="text-[10px] text-slate-500">合理范围：120 ~ 150 kg/h</div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <input type="number" inputmode="decimal" class="w-16 h-8 rounded-lg border border-emerald-100 text-right px-1.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-primary" placeholder="--" />
+              <span class="text-slate-500">kg/h</span>
+            </div>
+          </div>
+          <div class="px-3 py-2 flex items-center justify-between">
+            <div>
+              <div class="text-slate-800 font-medium">除杂效率</div>
+              <div class="text-[10px] text-slate-500">合理范围：85% ~ 95%</div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <input type="number" inputmode="decimal" class="w-16 h-8 rounded-lg border border-emerald-100 text-right px-1.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-primary" placeholder="--" value="89.5" />
+              <span class="text-slate-500">%</span>
+            </div>
+          </div>
+          <div class="px-3 py-2 flex items-center justify-between">
+            <div>
+              <div class="text-slate-800 font-medium">设备运行状态</div>
+              <div class="text-[10px] text-slate-500">状态异常将自动触发告警</div>
+            </div>
+            <div class="flex items-center gap-1.5 bg-emerald-50/60 rounded-full px-0.5 py-0.5">
+              <button class="px-2 py-1 rounded-full bg-primary text-white text-[10px]">正常</button>
+              <button class="px-2 py-1 rounded-full text-[10px] text-slate-600">待检</button>
+              <button class="px-2 py-1 rounded-full text-[10px] text-slate-600">异常</button>
+            </div>
+          </div>
+          <div class="px-3 py-2 flex items-center justify-between">
+            <div>
+              <div class="text-slate-800 font-medium">安全防护装置</div>
+              <div class="text-[10px] text-slate-500">防护罩、防护门、急停按钮状态</div>
+            </div>
+            <label class="inline-flex items-center cursor-pointer">
+              <input type="checkbox" class="sr-only peer" checked />
+              <div class="w-9 h-5 bg-slate-200 peer-checked:bg-primary rounded-full relative transition">
+                <div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm peer-checked:translate-x-4 transition"></div>
+              </div>
+              <span class="ml-1.5 text-[11px] text-slate-600">已确认</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 现场照片与自动识别 -->
+      <div class="bg-white rounded-2xl border border-emerald-100 p-3 space-y-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <i class="fa-solid fa-camera text-emerald-500 text-xs"></i>
+            <span class="text-xs font-medium text-slate-800">现场照片与自动识别</span>
+          </div>
+          <a href="photo_ocr.html" class="text-[11px] text-primary flex items-center gap-1">
+            去拍照 <i class="fa-solid fa-chevron-right text-[8px]"></i>
+          </a>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-16 h-16 rounded-xl border border-dashed border-emerald-200 flex items-center justify-center text-emerald-500 text-lg">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="flex-1 text-[11px] text-slate-500 leading-relaxed">
+            拍摄电流表、压力表等仪表盘照片，系统将通过 OCR 自动识别读数并填入对应指标，可在识别结果中人工确认。
+          </div>
+        </div>
+        <div class="bg-primarySoft rounded-xl px-2.5 py-2 text-[11px] text-slate-700">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-medium text-slate-800">最近一次识别结果</span>
+            <span class="text-emerald-600">置信度 96%</span>
+          </div>
+          <div class="flex items-center justify-between mb-1 text-[11px]">
+            <span>主电机电流</span>
+            <span class="font-semibold text-slate-900">15.2 A</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px]">
+            <span>除杂效率</span>
+            <span class="font-semibold text-slate-900">89.5 %</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 提交操作 -->
+      <div class="bg-white rounded-2xl border border-emerald-100 p-3">
+        <div class="flex items-center justify-between mb-2 text-[11px] text-slate-600">
+          <span>巡检人：张三 · 纺一车间</span>
+          <span>计划完成时间：09:00</span>
+        </div>
+        <textarea class="w-full h-16 rounded-xl border border-emerald-100 text-[11px] p-2.5 focus:outline-none focus:ring-1 focus:ring-primary mb-2" placeholder="补充说明（选填）：如发现轻微异常、异音、抖动等情况，可在此备注。"></textarea>
+        <div class="flex items-center justify-between">
+          <label class="inline-flex items-center text-[11px] text-slate-600">
+            <input type="checkbox" class="w-3 h-3 rounded border-slate-300 mr-1.5" checked />
+            同步到生产线看板
+          </label>
+          <button class="px-4 py-1.5 rounded-full bg-primary text-white text-[11px] font-medium flex items-center gap-1">
+            <i class="fa-solid fa-paper-plane text-[9px]"></i>
+            提交并进行下一工序
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部 TabBar -->
+    <div class="h-16 bg-white/95 border-t border-slate-200 flex items-center justify-around px-2">
+      <a href="home.html" class="flex flex-col items-center justify-center gap-0.5 text-slate-400">
+        <i class="fa-solid fa-house text-sm"></i>
+        <span class="text-[11px]">首页</span>
+      </a>
+      <a href="inspection_tasks.html" class="flex flex-col items-center justify-center gap-0.5 text-primary">
+        <i class="fa-solid fa-clipboard-list text-sm"></i>
+        <span class="text-[11px] font-medium">巡检</span>
+      </a>
+      <a href="dashboard_overview.html" class="flex flex-col items-center justify-center gap-0.5 text-slate-400">
+        <i class="fa-solid fa-chart-column text-sm"></i>
+        <span class="text-[11px]">看板</span>
+      </a>
+      <a href="analytics_reports.html" class="flex flex-col items-center justify-center gap-0.5 text-slate-400">
+        <i class="fa-regular fa-file-lines text-sm"></i>
+        <span class="text-[11px]">报表</span>
+      </a>
+      <a href="settings_permissions.html" class="flex flex-col items-center justify-center gap-0.5 text-slate-400">
+        <i class="fa-regular fa-user text-sm"></i>
+        <span class="text-[11px]">我的</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

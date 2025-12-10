@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>首页 - 彩诗禾-数字一体化厂区管控平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#16a34a',
+            primaryLight: '#dcfce7',
+            primarySoft: '#ecfdf3'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-slate-100 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] bg-gradient-to-b from-emerald-50 to-white rounded-[40px] shadow-[0_20px_60px_rgba(16,185,129,0.45)] border border-emerald-100 overflow-hidden relative flex flex-col">
+    <!-- 状态栏 -->
+    <div class="h-11 px-4 flex items-center justify-between text-xs text-slate-700">
+      <div class="font-semibold">9:41</div>
+      <div class="flex items-center gap-1.5">
+        <i class="fa-solid fa-signal"></i>
+        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-battery-full"></i>
+      </div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <div class="px-4 pb-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-[11px] text-slate-500 mb-0.5">欢迎回来</div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base font-semibold text-slate-900">彩诗禾-厂区总览</h1>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-primarySoft text-primary">今日白班</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-emerald-600 text-xs">
+            <i class="fa-regular fa-bell"></i>
+          </button>
+          <a href="settings_permissions.html" class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-medium">
+            管
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="flex-1 overflow-y-auto px-4 pb-20 space-y-3 bg-gradient-to-b from-emerald-50/80 to-white">
+      <!-- 关键指标概览 -->
+      <div class="grid grid-cols-2 gap-2">
+        <div class="col-span-1 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl p-3 text-white shadow-lg">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs opacity-80">生产线巡检完成率</span>
+            <i class="fa-solid fa-gauge-high text-xs opacity-80"></i>
+          </div>
+          <div class="flex items-end justify-between">
+            <div>
+              <div class="text-2xl font-semibold leading-none mb-1">86%</div>
+              <div class="text-[11px] opacity-80">今日已完成 24 / 28 条线</div>
+            </div>
+            <div class="flex flex-col items-end gap-1">
+              <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-white/15">异常 2 条</span>
+              <span class="text-[10px] opacity-90">目标 ≥ 95%</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-1 grid grid-rows-2 gap-2">
+          <div class="bg-white rounded-2xl border border-emerald-100 p-2.5 flex items-center justify-between">
+            <div>
+              <div class="text-[11px] text-slate-500">待巡检任务</div>
+              <div class="text-lg font-semibold text-slate-900 leading-none mt-1">7 条</div>
+            </div>
+            <a href="inspection_tasks.html" class="text-[11px] text-primary px-2 py-1 rounded-full bg-primarySoft">
+              去处理
+            </a>
+          </div>
+          <div class="bg-white rounded-2xl border border-emerald-100 p-2.5 flex items-center justify-between">
+            <div>
+              <div class="text-[11px] text-slate-500">当前告警</div>
+              <div class="flex items-baseline gap-1 mt-1">
+                <span class="text-lg font-semibold text-orange-500">3</span>
+                <span class="text-[10px] text-slate-500">条异常待确认</span>
+              </div>
+            </div>
+            <a href="dashboard_overview.html" class="text-[11px] text-orange-600 px-2 py-1 rounded-full bg-orange-50 border border-orange-100">
+              在看板中查看
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 今日巡检流程卡片 -->
+      <div class="bg-white rounded-2xl border border-emerald-100 p-3">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-1.5">
+            <i class="fa-solid fa-list-check text-emerald-500 text-xs"></i>
+            <span class="text-xs font-medium text-slate-800">开清棉 → 络筒全流程巡检</span>
+          </div>
+          <a href="inspection_tasks.html" class="text-[11px] text-primary">更多</a>
+        </div>
+        <div class="flex items-center gap-1.5 flex-wrap mb-2">
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-primarySoft text-primary font-medium">开清棉</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600">梳棉</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600">并条</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600">精梳</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600">粗纺</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600">细纺</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600">络筒</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="text-[11px] text-slate-500">
+            白班已完成 <span class="text-emerald-600 font-semibold">4 / 7</span> 个工序
+          </div>
+          <a href="inspection_form.html" class="text-[11px] px-3 py-1 rounded-full bg-primary text-white flex items-center gap-1">
+            <i class="fa-solid fa-play text-[9px]"></i> 继续本班巡检
+          </a>
+        </div>
+      </div>
+
+      <!-- 快捷入口 -->
+      <div class="grid grid-cols-3 gap-2">
+        <a href="inspection_tasks.html" class="bg-white rounded-2xl border border-emerald-100 p-2.5 flex flex-col items-center justify-center gap-1">
+          <div class="w-9 h-9 rounded-xl bg-primarySoft text-primary flex items-center justify-center">
+            <i class="fa-solid fa-clipboard-check text-sm"></i>
+          </div>
+          <div class="text-[11px] text-slate-800">巡检任务</div>
+          <div class="text-[10px] text-emerald-500">7 条待处理</div>
+        </a>
+        <a href="dashboard_overview.html" class="bg-white rounded-2xl border border-emerald-100 p-2.5 flex flex-col items-center justify-center gap-1">
+          <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <i class="fa-solid fa-chart-line text-sm"></i>
+          </div>
+          <div class="text-[11px] text-slate-800">生产线看板</div>
+          <div class="text-[10px] text-slate-500">实时总览</div>
+        </a>
+        <a href="analytics_reports.html" class="bg-white rounded-2xl border border-emerald-100 p-2.5 flex flex-col items-center justify-center gap-1">
+          <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <i class="fa-regular fa-file-lines text-sm"></i>
+          </div>
+          <div class="text-[11px] text-slate-800">周报/月报</div>
+          <div class="text-[10px] text-slate-500">一键生成</div>
+        </a>
+      </div>
+
+      <!-- 底部模块 -->
+      <div class="bg-white rounded-2xl border border-emerald-100 p-3 space-y-2 mb-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved text-emerald-500 text-xs"></i>
+            <span class="text-xs font-medium text-slate-800">权限与系统健康</span>
+          </div>
+          <a href="settings_permissions.html" class="text-[11px] text-primary">管理</a>
+        </div>
+        <div class="flex items-center justify-between text-[11px]">
+          <div class="flex items-center gap-1.5 text-slate-600">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            已授权微信用户：<span class="font-semibold text-slate-800">18</span> 人
+          </div>
+          <div class="flex items-center gap-1.5 text-slate-600">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            最近 24 小时告警：<span class="font-semibold text-orange-500">5</span> 条
+          </div>
+        </div>
+        <div class="text-[10px] text-slate-500">
+          管理员可为微信授权用户配置“管理员、值班人员、查看者”等角色，并按生产线精细化控制数据录入和查看权限。
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部 TabBar -->
+    <div class="h-16 bg-white/95 border-t border-slate-200 flex items-center justify-around px-2">
+      <a href="home.html" class="flex flex-col items-center justify-center gap-0.5 text-primary">
+        <i class="fa-solid fa-house text-sm"></i>
+        <span class="text-[11px] font-medium">首页</span>
+      </a>
+      <a href="inspection_tasks.html" class="flex flex-col items-center justify-center gap-0.5 text-slate-400">
+        <i class="fa-solid fa-clipboard-list text-sm"></i>
+        <span class="text-[11px]">巡检</span>
+      </a>
+      <a href="dashboard_overview.html" class="flex flex-col items-center justify-center gap-0.5 text-slate-400">
+        <i class="fa-solid fa-chart-column text-sm"></i>
+        <span class="text-[11px]">看板</span>
+      </a>
+      <a href="analytics_reports.html" class="flex flex-col items-center justify-center gap-0.5 text-slate-400">
+        <i class="fa-regular fa-file-lines text-sm"></i>
+        <span class="text-[11px]">报表</span>
+      </a>
+      <a href="settings_permissions.html" class="flex flex-col items-center justify-center gap-0.5 text-slate-400">
+        <i class="fa-regular fa-user text-sm"></i>
+        <span class="text-[11px]">我的</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

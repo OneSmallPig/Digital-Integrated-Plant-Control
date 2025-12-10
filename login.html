@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>登录 - 彩诗禾-数字一体化厂区管控平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#16a34a',
+            primaryLight: '#dcfce7',
+            primarySoft: '#ecfdf3'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-slate-100 flex items-center justify-center min-h-screen">
+  <div class="w-[393px] h-[852px] bg-gradient-to-b from-emerald-50 to-white rounded-[40px] shadow-[0_20px_60px_rgba(16,185,129,0.45)] border border-emerald-100 overflow-hidden relative">
+    <!-- iOS 状态栏 -->
+    <div class="h-11 px-4 flex items-center justify-between text-xs text-slate-700">
+      <div class="font-semibold">9:41</div>
+      <div class="flex items-center gap-1.5">
+        <i class="fa-solid fa-signal"></i>
+        <i class="fa-solid fa-wifi"></i>
+        <i class="fa-solid fa-battery-full"></i>
+      </div>
+    </div>
+
+    <!-- 登录内容 -->
+    <div class="px-6 pt-4 pb-6 h-[calc(100%-44px)] flex flex-col">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white shadow-lg">
+          <i class="fa-solid fa-industry text-xl"></i>
+        </div>
+        <div>
+          <div class="text-sm text-emerald-700 font-semibold tracking-[0.08em]">CAI SHI HE</div>
+          <h1 class="text-lg font-bold text-slate-900 leading-tight">彩诗禾-数字一体化厂区管控平台</h1>
+        </div>
+      </div>
+
+      <div class="bg-primarySoft border border-primaryLight rounded-2xl p-4 mb-5">
+        <p class="text-sm text-slate-800 font-medium mb-1">微信安全登录</p>
+        <p class="text-xs text-slate-600 leading-relaxed">
+          授权后将获取您的微信昵称和头像，用于建立账号体系和生产线访问权限。管理员可基于微信身份配置角色与可访问的生产线。
+        </p>
+      </div>
+
+      <div class="space-y-3 mb-6">
+        <a href="home.html" class="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-[#07C160] text-white py-3.5 text-sm font-semibold shadow-lg shadow-emerald-500/40 active:scale-[0.98] transition">
+          <i class="fa-brands fa-weixin text-lg"></i>
+          <span>使用微信授权登录</span>
+        </a>
+        <button class="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-200 bg-white text-emerald-700 py-3 text-xs font-medium">
+          <i class="fa-solid fa-mobile-screen-button text-base text-emerald-500"></i>
+          <span>使用手机号登录（原型示意）</span>
+        </button>
+      </div>
+
+      <div class="text-[11px] text-slate-500 leading-relaxed mb-6">
+        登录即代表您已阅读并同意
+        <span class="text-emerald-600 font-medium">《用户协议》</span>和
+        <span class="text-emerald-600 font-medium">《隐私政策》</span>。
+        微信授权用户将自动关联为平台账号，后续可由管理员进行角色分配和生产线权限配置。
+      </div>
+
+      <div class="mt-auto">
+        <div class="bg-white/70 border border-dashed border-emerald-200 rounded-2xl p-3 mb-3">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs text-slate-500">示例管理员账号</span>
+            <span class="text-[11px] text-emerald-500">用于产品演示</span>
+          </div>
+          <div class="flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 text-xs">
+                管
+              </div>
+              <div>
+                <div class="font-semibold text-slate-800">彩诗禾·生产管理员</div>
+                <div class="text-[11px] text-slate-500">已绑定微信：纺一车间-张三</div>
+              </div>
+            </div>
+            <a href="home.html" class="text-[11px] text-emerald-600 font-medium px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100">
+              直接体验
+            </a>
+          </div>
+        </div>
+        <p class="text-[10px] text-center text-slate-400">
+          山东纺织厂 | 适用于开清棉、梳棉、并条、精梳、粗纺、细纺、络筒等工序的数字化巡检与管控。
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
