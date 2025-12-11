@@ -19,30 +19,6 @@
     };
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script>
-    function openOverviewFilterModal() {
-      var modal = document.getElementById('overviewFilterModal');
-      if (modal) modal.classList.remove('hidden');
-    }
-    function closeOverviewFilterModal() {
-      var modal = document.getElementById('overviewFilterModal');
-      if (modal) modal.classList.add('hidden');
-      // 关闭时收起值班人员下拉
-      var dropdown = document.getElementById('dutyDropdown');
-      if (dropdown) dropdown.classList.add('hidden');
-    }
-    function toggleDutyDropdown() {
-      var dropdown = document.getElementById('dutyDropdown');
-      if (!dropdown) return;
-      dropdown.classList.toggle('hidden');
-    }
-    function selectDuty(name) {
-      var label = document.getElementById('dutySelected');
-      if (label) label.textContent = name;
-      var dropdown = document.getElementById('dutyDropdown');
-      if (dropdown) dropdown.classList.add('hidden');
-    }
-  </script>
 </head>
 <body class="bg-slate-100 flex items-center justify-center min-h-screen">
   <div class="w-[393px] h-[852px] bg-gradient-to-b from-emerald-50 to-white rounded-[40px] shadow-[0_20px_60px_rgba(16,185,129,0.45)] border border-emerald-100 overflow-hidden relative flex flex-col">
@@ -62,236 +38,404 @@
         <i class="fa-solid fa-chevron-left"></i>
       </button>
       <div class="text-sm font-semibold text-slate-900">生产线总览看板</div>
-      <button onclick="openOverviewFilterModal()" class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs" aria-label="看板统计配置">
-        <i class="fa-solid fa-sliders"></i>
-      </button>
+      <div class="w-8 h-8"></div>
     </div>
 
     <!-- 内容区 -->
-    <div class="flex-1 overflow-y-auto px-4 pb-20 bg-gradient-to-b from-emerald-50/80 to-white space-y-3">
-      <!-- 筛选与关键指标（以车间·班次为维度） -->
-      <div class="bg-white rounded-2xl border border-emerald-100 p-3 space-y-2">
-        <div class="flex items-center justify-between text-[11px] text-slate-600">
-          <div class="flex items-center gap-1.5">
-            <i class="fa-solid fa-location-dot text-emerald-500"></i>
-            <span>全部车间 · 全部班次</span>
-          </div>
-          <span>统计周期：今日</span>
-        </div>
-        <div class="grid grid-cols-3 gap-2 text-[11px]">
-          <button class="px-2 py-1.5 rounded-xl bg-primary text-white flex items-center justify-center gap-1 active:scale-95">
-            <i class="fa-solid fa-layer-group"></i>
-            全部工序
-          </button>
-          <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700 hover:bg-emerald-100">
-            <i class="fa-solid fa-industry mr-1"></i>车间
-          </button>
-          <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700 hover:bg-emerald-100">
-            <i class="fa-solid fa-users mr-1"></i>值班人员
-          </button>
-        </div>
-        <div class="flex items-center gap-1 text-[10px] text-slate-500">
-          <i class="fa-solid fa-database text-[9px] text-emerald-500"></i>
-          <span>数据来源：今日各班次值班人员在巡检表单中录入的设备运行数据。</span>
-        </div>
-      </div>
-
-      <!-- 今日状态摘要（来自巡检数据汇总） -->
-      <div class="grid grid-cols-2 gap-2">
-        <div class="bg-white rounded-2xl border border-emerald-100 p-3">
-          <div class="text-[11px] text-slate-500 mb-1">巡检完成率</div>
-          <div class="flex items-end justify-between">
-            <span class="text-2xl font-semibold text-red-500">86%</span>
-            <span class="text-[10px] text-slate-500">目标 ≥ 95%</span>
-          </div>
-          <div class="mt-2 h-1.5 rounded-full bg-emerald-50 overflow-hidden">
-            <div class="h-full w-[86%] bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
-          </div>
-        </div>
-        <div class="bg-white rounded-2xl border border-emerald-100 p-3">
-          <div class="text-[11px] text-slate-500 mb-1">当前异常与告警</div>
-          <div class="flex items-end justify-between mb-1">
-            <span class="text-xl font-semibold text-orange-500">3</span>
-            <span class="text-[10px] text-slate-500">重度：1 · 轻微：2</span>
-          </div>
-          <div class="flex items-center gap-1 text-[10px] text-slate-500">
-            <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> 并条
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 ml-2"></span> 粗纺
-          </div>
-        </div>
-      </div>
-
-      <!-- 班次完成率柱状图（按车间·班次维度） -->
-      <div class="bg-white rounded-2xl border border-emerald-100 p-3 space-y-2">
+    <div class="flex-1 overflow-y-auto px-4 pb-20 bg-gradient-to-b from-emerald-50/80 to-white space-y-4">
+      <!-- 工厂总览看板（第一屏） -->
+      <div class="space-y-3">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-1.5">
-            <i class="fa-solid fa-chart-column text-emerald-500 text-xs"></i>
-            <span class="text-xs font-medium text-slate-800">班次完成率对比（车间 · 班次）</span>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] px-2 py-1 rounded-full bg-slate-900 text-white font-semibold">工厂总览</span>
+            <!-- <span class="text-xs text-slate-500">第一屏 · 高层视图</span> -->
           </div>
-          <div class="flex items-center gap-1">
-            <button class="px-2 py-0.5 rounded-full bg-primarySoft text-primary text-[10px]">按车间·班次</button>
-            <button class="px-2 py-0.5 rounded-full bg-emerald-50 text-slate-600 text-[10px]">按班次汇总</button>
-          </div>
+          <!-- <div class="text-[11px] text-slate-500">已汇总全厂，无需筛选</div> -->
         </div>
-        <!-- 简化版柱状图：X 轴为“车间 · 班次”组合 -->
-        <div class="mt-2">
-          <!-- Y 轴刻度 -->
-          <div class="flex flex-col h-24 justify-between text-[9px] text-slate-400">
-            <div class="flex items-center gap-1">
-              <span class="w-6 text-right">100%</span>
-              <div class="flex-1 h-px bg-slate-100"></div>
-            </div>
-            <div class="flex items-center gap-1">
-              <span class="w-6 text-right">75%</span>
-              <div class="flex-1 h-px bg-slate-100"></div>
-            </div>
-            <div class="flex items-center gap-1">
-              <span class="w-6 text-right">50%</span>
-              <div class="flex-1 h-px bg-slate-100"></div>
-            </div>
-            <div class="flex items-center gap-1">
-              <span class="w-6 text-right">25%</span>
-              <div class="flex-1 h-px bg-slate-100"></div>
-            </div>
-          </div>
-          <!-- 柱体区域 -->
-          <div class="mt-1 flex items-end justify-around">
-            <div class="flex flex-col items-center gap-1">
-              <div class="flex-1 flex items-end">
-                <div class="w-6 bg-emerald-100 rounded-t-md overflow-hidden flex items-end justify-center">
-                  <div class="w-4 bg-emerald-500 rounded-t-md" style="height:88%;"></div>
-                </div>
-              </div>
-              <div class="text-[9px] text-slate-600 text-center leading-tight">
-                纺一·白班
-              </div>
-              <div class="text-[9px] text-emerald-600">88%</div>
-            </div>
-            <div class="flex flex-col items-center gap-1">
-              <div class="flex-1 flex items-end">
-                <div class="w-6 bg-emerald-100 rounded-t-md overflow-hidden flex items-end justify-center">
-                  <div class="w-4 bg-emerald-400 rounded-t-md" style="height:80%;"></div>
-                </div>
-              </div>
-              <div class="text-[9px] text-slate-600 text-center leading-tight">
-                纺一·中班
-              </div>
-              <div class="text-[9px] text-emerald-600">80%</div>
-            </div>
-            <div class="flex flex-col items-center gap-1">
-              <div class="flex-1 flex items-end">
-                <div class="w-6 bg-emerald-100 rounded-t-md overflow-hidden flex items-end justify-center">
-                  <div class="w-4 bg-emerald-300 rounded-t-md" style="height:72%;"></div>
-                </div>
-              </div>
-              <div class="text-[9px] text-slate-600 text-center leading-tight">
-                纺一·夜班
-              </div>
-              <div class="text-[9px] text-emerald-600">72%</div>
-            </div>
-            <div class="flex flex-col items-center gap-1">
-              <div class="flex-1 flex items-end">
-                <div class="w-6 bg-emerald-100 rounded-t-md overflow-hidden flex items-end justify-center">
-                  <div class="w-4 bg-emerald-700 rounded-t-md" style="height:94%;"></div>
-                </div>
-              </div>
-              <div class="text-[9px] text-slate-600 text-center leading-tight">
-                纺二·白班
-              </div>
-              <div class="text-[9px] text-emerald-600">94%</div>
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center justify-between text-[10px] text-slate-500 mt-2">
-          <span>每根柱体统计单个“车间 · 班次”的巡检任务完成率。</span>
-          <span class="text-emerald-600">可在 Web 端查看更多明细</span>
-        </div>
-      </div>
 
-      <!-- 工序异常占比饼图 -->
-      <div class="bg-white rounded-2xl border border-emerald-100 p-3 flex items-center gap-3">
-        <div class="flex-1">
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center gap-1.5">
-              <i class="fa-solid fa-chart-pie text-emerald-500 text-xs"></i>
-              <span class="text-xs font-medium text-slate-800">工序异常占比</span>
-            </div>
-            <span class="text-[10px] text-slate-500">今日 · 按异常记录数统计</span>
+        <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl p-3 text-white shadow-lg">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs opacity-90">全厂巡检执行率</div>
+            <span class="text-[11px] px-2 py-1 rounded-full bg-white/15">核心 KPI</span>
           </div>
           <div class="flex items-center gap-3">
             <div class="relative w-20 h-20">
-              <div class="w-20 h-20 rounded-full" style="background: conic-gradient(#fb923c 0 20%, #facc15 20% 40%, #22c55e 40% 100%);"></div>
-              <div class="absolute inset-2 rounded-full bg-white flex flex-col items-center justify-center">
-                <span class="text-[9px] text-slate-500">异常占比</span>
-                <span class="text-xs font-semibold text-slate-900">24%</span>
+              <svg viewBox="0 0 36 36" class="w-20 h-20 -rotate-90">
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="3"/>
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="3.2" stroke-dasharray="92,100" stroke-linecap="round"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center flex-col text-white">
+                <span class="text-xl font-bold leading-none">92%</span>
+                <span class="text-[10px] opacity-80">执行率</span>
               </div>
             </div>
-            <div class="flex-1 space-y-1 text-[10px]">
+            <div class="flex-1 space-y-2">
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-[#fb923c]"></span>
-                  <span class="text-slate-700">粗纺</span>
-                </div>
-                <span class="text-slate-500">10 次 · 41%</span>
+                <div class="text-sm font-semibold">今日计划巡检</div>
+                <div class="text-sm font-semibold">已完成</div>
               </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-[#facc15]"></span>
-                  <span class="text-slate-700">精梳</span>
-                </div>
-                <span class="text-slate-500">6 次 · 25%</span>
+              <div class="flex items-center justify-between text-lg font-bold">
+                <span>52</span>
+                <span>48</span>
               </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-[#22c55e]"></span>
-                  <span class="text-slate-700">络筒</span>
+              <div class="flex items-center gap-1 text-[11px]">
+                <span class="px-2 py-0.5 rounded-full bg-white/15 flex items-center gap-1"><i class="fa-solid fa-arrow-trend-up text-[10px]"></i> 较昨日 +6%</span>
+                <span class="opacity-85">进度趋势向上</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <a href="device_detail.html" class="bg-white rounded-2xl border border-emerald-100 p-2.5 flex flex-col gap-1 shadow-[0_6px_18px_rgba(16,185,129,0.08)]">
+            <div class="text-[11px] text-slate-500">异常设备</div>
+            <div class="flex items-baseline gap-1">
+              <span class="text-xl font-bold text-orange-500">12</span>
+              <span class="text-[10px] text-orange-500">台</span>
+            </div>
+            <div class="text-[10px] text-slate-500">优先派单</div>
+          </a>
+          <a href="device_detail.html" class="bg-white rounded-2xl border border-emerald-100 p-2.5 flex flex-col gap-1 shadow-[0_6px_18px_rgba(16,185,129,0.08)]">
+            <div class="text-[11px] text-slate-500">异常指标</div>
+            <div class="flex items-baseline gap-1">
+              <span class="text-xl font-bold text-rose-500">27</span>
+              <span class="text-[10px] text-rose-500">项</span>
+            </div>
+            <div class="text-[10px] text-slate-500">集中排查</div>
+          </a>
+          <a href="device_detail.html" class="bg-white rounded-2xl border border-emerald-100 p-2.5 flex flex-col gap-1 shadow-[0_6px_18px_rgba(16,185,129,0.08)]">
+            <div class="flex items-center justify-between text-[11px] text-slate-500">
+              <span>严重生产线 TOP3</span>
+              <!-- <span class="px-1.5 py-0.5 rounded-full bg-rose-50 text-rose-500 text-[10px]">优先处理</span> -->
+            </div>
+            <div class="space-y-1 text-[10px] text-slate-700">
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full bg-rose-100 text-rose-600 text-[9px] font-semibold flex items-center justify-center">1</span>
+                <span class="flex-1">细纺一线</span>
+                <!-- <span class="text-rose-500 font-semibold">高</span> -->
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full bg-amber-100 text-amber-600 text-[9px] font-semibold flex items-center justify-center">2</span>
+                <span class="flex-1">粗纺二线</span>
+                <!-- <span class="text-amber-500 font-semibold">中</span> -->
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full bg-slate-100 text-slate-600 text-[9px] font-semibold flex items-center justify-center">3</span>
+                <span class="flex-1">并条一线</span>
+                <!-- <span class="text-slate-500 font-semibold">低</span> -->
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-emerald-100 p-3 shadow-[0_8px_22px_rgba(16,185,129,0.08)] space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-solid fa-chart-line text-emerald-500 text-xs"></i>
+              <span class="text-xs font-semibold text-slate-800">全厂关键指标趋势</span>
+            </div>
+            <div class="flex items-center text-[10px] bg-slate-100 rounded-full px-1 py-0.5">
+              <span class="px-2 py-0.5 rounded-full bg-white text-slate-800 shadow">今日</span>
+              <span class="px-2 py-0.5 text-slate-500">本周</span>
+              <span class="px-2 py-0.5 text-slate-500">本月</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-[10px] text-slate-500">
+            <div class="h-20 rounded-xl bg-gradient-to-b from-emerald-50 to-white border border-emerald-100 p-2 relative overflow-hidden">
+              <div class="text-[11px] font-medium text-slate-700 mb-1">温度</div>
+              <div class="absolute inset-x-1 bottom-2 h-10 bg-gradient-to-t from-emerald-200/60 via-emerald-400/50 to-transparent rounded-full blur-2xl"></div>
+              <div class="flex items-end justify-between h-10 relative z-10">
+                <div class="w-2 h-6 bg-emerald-500 rounded-full"></div>
+                <div class="w-2 h-9 bg-emerald-400 rounded-full"></div>
+                <div class="w-2 h-8 bg-emerald-300 rounded-full"></div>
+                <div class="w-2 h-10 bg-emerald-500 rounded-full"></div>
+                <div class="w-2 h-7 bg-emerald-300 rounded-full"></div>
+              </div>
+            </div>
+            <div class="h-20 rounded-xl bg-gradient-to-b from-amber-50 to-white border border-amber-100 p-2 relative overflow-hidden">
+              <div class="text-[11px] font-medium text-slate-700 mb-1">电流</div>
+              <div class="absolute inset-x-1 bottom-2 h-10 bg-gradient-to-t from-amber-200/60 via-amber-400/50 to-transparent rounded-full blur-2xl"></div>
+              <div class="flex items-end justify-between h-10 relative z-10">
+                <div class="w-2 h-5 bg-amber-400 rounded-full"></div>
+                <div class="w-2 h-8 bg-amber-500 rounded-full"></div>
+                <div class="w-2 h-6 bg-amber-300 rounded-full"></div>
+                <div class="w-2 h-9 bg-amber-500 rounded-full"></div>
+                <div class="w-2 h-7 bg-amber-400 rounded-full"></div>
+              </div>
+            </div>
+            <div class="h-20 rounded-xl bg-gradient-to-b from-sky-50 to-white border border-sky-100 p-2 relative overflow-hidden">
+              <div class="text-[11px] font-medium text-slate-700 mb-1">压力</div>
+              <div class="absolute inset-x-1 bottom-2 h-10 bg-gradient-to-t from-sky-200/60 via-sky-400/50 to-transparent rounded-full blur-2xl"></div>
+              <div class="flex items-end justify-between h-10 relative z-10">
+                <div class="w-2 h-6 bg-sky-400 rounded-full"></div>
+                <div class="w-2 h-7 bg-sky-300 rounded-full"></div>
+                <div class="w-2 h-9 bg-sky-500 rounded-full"></div>
+                <div class="w-2 h-5 bg-sky-300 rounded-full"></div>
+                <div class="w-2 h-8 bg-sky-400 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-emerald-100 p-3 shadow-[0_8px_22px_rgba(16,185,129,0.08)]">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-regular fa-compass text-emerald-500 text-xs"></i>
+              <span class="text-xs font-semibold text-slate-800">生产线运行健康度评分 (AI)</span>
+            </div>
+            <a href="inspection_form.html" class="text-[11px] text-primary">查看详情</a>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-600">
+            <div class="relative h-32 rounded-xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 overflow-hidden">
+              <div class="absolute inset-6 rounded-full border border-emerald-200/70"></div>
+              <div class="absolute inset-4 rounded-full border border-emerald-200/50"></div>
+              <div class="absolute inset-2 rounded-full border border-emerald-200/40"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex flex-col items-center text-slate-700">
+                  <span class="text-[10px]">全厂均值</span>
+                  <span class="text-xl font-bold text-emerald-600">86</span>
                 </div>
-                <span class="text-slate-500">8 次 · 34%</span>
+              </div>
+              <!-- <div class="absolute inset-6">
+                <div class="w-full h-full relative">
+                  <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[1px] h-6 bg-emerald-500/80 rotate-[18deg]"></div>
+                  <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[1px] h-7 bg-emerald-400 rotate-[60deg]"></div>
+                  <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[1px] h-9 bg-emerald-500/70 rotate-[110deg]"></div>
+                  <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[1px] h-6 bg-emerald-300 rotate-[165deg]"></div>
+                  <div class="absolute left-1/2 top-0 -translate-x-1/2 w-[1px] h-8 bg-emerald-400 rotate-[220deg]"></div>
+                </div>
+              </div>
+              <div class="absolute bottom-2 inset-x-3 flex justify-between text-[10px] text-slate-500">
+                <span>数据完整度</span>
+                <span>异常次数</span>
+                <span>趋势变化</span>
+              </div> -->
+            </div>
+            <div class="grid grid-rows-3 gap-1.5">
+              <div class="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-emerald-50 to-white border border-emerald-100">
+                <div class="text-[10px] text-slate-600">开清棉一线</div>
+                <div class="flex items-center gap-1 text-emerald-600 font-semibold">92 <i class="fa-solid fa-arrow-up text-[9px]"></i></div>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-amber-50 to-white border border-amber-100">
+                <div class="text-[10px] text-slate-600">粗纺二线</div>
+                <div class="flex items-center gap-1 text-amber-600 font-semibold">78 <i class="fa-solid fa-arrow-down text-[9px]"></i></div>
+              </div>
+              <div class="flex items-center justify-between p-2 rounded-lg bg-gradient-to-r from-sky-50 to-white border border-sky-100">
+                <div class="text-[10px] text-slate-600">络筒一线</div>
+                <div class="flex items-center gap-1 text-sky-600 font-semibold">84 <i class="fa-solid fa-arrow-up text-[9px]"></i></div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 生产线卡片（按车间命名的生产单元示意） -->
-      <div class="space-y-2">
-        <a href="device_detail.html" class="block bg-white rounded-2xl border border-emerald-100 p-3">
-          <div class="flex items-center justify-between mb-1.5">
-            <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-xl bg-primarySoft text-primary flex items-center justify-center text-xs">
-                1#
-              </div>
-              <div>
-                <div class="text-xs font-semibold text-slate-900">1#纺纱生产线</div>
-                <div class="text-[9px] text-slate-500">开清棉 → 梳棉 → 并条 → 精梳 → 粗纺 → 细纺 → 络筒</div>
-              </div>
-            </div>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">整体正常</span>
+      <!-- 生产线看板（第二屏） -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] px-2 py-1 rounded-full bg-slate-900 text-white font-semibold">生产线看板</span>
+            <!-- <span class="text-xs text-slate-500">第二屏 · 中层管理视图</span> -->
           </div>
-          <div class="flex items-center justify-between text-[11px] text-slate-600">
-            <span>巡检完成：6 / 7 工序</span>
-            <span>断头率：0.9% · 能耗：-3.1%</span>
-          </div>
-        </a>
+          <a href="inspection_tasks.html" class="text-[11px] text-primary">跳转任务</a>
+        </div>
 
-        <a href="device_detail.html" class="block bg-white rounded-2xl border border-amber-200 p-3">
-          <div class="flex items-center justify-between mb-1.5">
-            <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xs">
-                2#
+        <div class="bg-white rounded-2xl border border-slate-200 p-3 shadow-[0_8px_22px_rgba(15,23,42,0.08)] grid grid-cols-2 gap-3">
+          <div class="space-y-2">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-regular fa-clock text-emerald-500 text-xs"></i>
+              <span class="text-xs font-semibold text-slate-800">当班巡检进度</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="relative w-20 h-20">
+                <svg viewBox="0 0 36 36" class="w-20 h-20 -rotate-90">
+                  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+                  <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831" fill="none" stroke="#10b981" stroke-width="3.2" stroke-dasharray="74,100" stroke-linecap="round"/>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center flex-col text-slate-800">
+                  <span class="text-xl font-bold">74%</span>
+                  <span class="text-[10px] text-slate-500">白班</span>
+                </div>
               </div>
-              <div>
-                <div class="text-xs font-semibold text-slate-900">2#纺纱生产线</div>
-                <div class="text-[11px] text-slate-500">粗纺/细纺/络筒工序波动</div>
+              <div class="space-y-1 text-[11px] text-slate-600 flex-1">
+                <div class="flex items-center justify-between">
+                  <span>计划点位</span><span class="font-semibold text-slate-800">38</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>已巡检</span><span class="font-semibold text-emerald-600">28</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>巡检中</span><span class="font-semibold text-amber-600">3</span>
+                </div>
               </div>
             </div>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">轻微异常</span>
           </div>
-          <div class="flex items-center justify-between text-[11px] text-slate-600">
-            <span>巡检完成：7 / 7 工序</span>
-            <span>断头率：0.6% · 能耗：-2.4%</span>
+          <div class="space-y-2">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-solid fa-sitemap text-emerald-500 text-xs"></i>
+              <span class="text-xs font-semibold text-slate-800">正在巡检人员</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-600">
+              <div class="p-2 rounded-xl bg-emerald-50 border border-emerald-100">
+                <div class="font-semibold text-slate-800">李工</div>
+                <div>细纺一线 · 6/10</div>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                <div class="font-semibold text-slate-800">王工</div>
+                <div>络筒一线 · 5/8</div>
+              </div>
+            </div>
           </div>
-        </a>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-3 shadow-[0_8px_22px_rgba(15,23,42,0.08)]">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-nodes text-emerald-500 text-xs"></i>
+              <span class="text-xs font-semibold text-slate-800">设备状态分布</span>
+            </div>
+            <span class="text-[10px] text-slate-500">可疑/异常优先派单</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="relative w-24 h-24">
+              <div class="absolute inset-0 rounded-full bg-slate-100"></div>
+              <div class="absolute inset-2 rounded-full bg-[conic-gradient(#10b981_0deg_180deg,#facc15_180deg_250deg,#f97316_250deg_310deg,#94a3b8_310deg_360deg)]"></div>
+              <div class="absolute inset-6 bg-white rounded-full flex items-center justify-center text-[11px] text-slate-700">
+                <div class="text-center">
+                  <div class="text-xs font-bold text-slate-900">总计</div>
+                  <div class="text-xl font-bold text-emerald-600">168</div>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-600 flex-1">
+              <div class="flex items-center gap-2 p-2 rounded-lg bg-emerald-50 border border-emerald-100">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <div class="flex justify-between w-full"><span>正常</span><span class="font-semibold text-slate-800">118</span></div>
+              </div>
+              <div class="flex items-center gap-2 p-2 rounded-lg bg-amber-50 border border-amber-100">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                <div class="flex justify-between w-full"><span>可疑</span><span class="font-semibold text-slate-800">24</span></div>
+              </div>
+              <div class="flex items-center gap-2 p-2 rounded-lg bg-rose-50 border border-rose-100">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                <div class="flex justify-between w-full"><span>异常</span><span class="font-semibold text-slate-800">18</span></div>
+              </div>
+              <div class="flex items-center gap-2 p-2 rounded-lg bg-slate-50 border border-slate-100">
+                <span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                <div class="flex justify-between w-full"><span>未巡检</span><span class="font-semibold text-slate-800">8</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-3 shadow-[0_8px_22px_rgba(15,23,42,0.08)] space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-regular fa-chart-bar text-emerald-500 text-xs"></i>
+              <span class="text-xs font-semibold text-slate-800">指标健康度总览</span>
+            </div>
+            <div class="flex items-center text-[10px] bg-slate-100 rounded-full px-1 py-0.5">
+              <span class="px-2 py-0.5 rounded-full bg-white text-slate-800 shadow">本周</span>
+              <span class="px-2 py-0.5 text-slate-500">本月</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 text-[11px] text-slate-600">
+            <div class="h-[72px] p-2 rounded-xl bg-gradient-to-b from-emerald-50 to-white border border-emerald-100">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-slate-800">运行温度</span>
+                <span class="text-emerald-600 font-semibold">↑</span>
+              </div>
+              <div class="mt-1 h-12 flex items-end gap-1">
+                <div class="w-1.5 h-4 bg-emerald-200 rounded-full"></div>
+                <div class="w-1.5 h-7 bg-emerald-300 rounded-full"></div>
+                <div class="w-1.5 h-6 bg-emerald-400 rounded-full"></div>
+                <div class="w-1.5 h-10 bg-emerald-500 rounded-full"></div>
+                <div class="w-1.5 h-8 bg-emerald-400 rounded-full"></div>
+                <div class="w-1.5 h-7 bg-emerald-300 rounded-full"></div>
+                <div class="w-1.5 h-9 bg-emerald-500 rounded-full"></div>
+              </div>
+            </div>
+            <div class="h-[72px] p-2 rounded-xl bg-gradient-to-b from-sky-50 to-white border border-sky-100">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-slate-800">电流负载</span>
+                <span class="text-sky-600 font-semibold">→</span>
+              </div>
+              <div class="mt-1 h-12 flex items-end gap-1">
+                <div class="w-1.5 h-6 bg-sky-300 rounded-full"></div>
+                <div class="w-1.5 h-5 bg-sky-200 rounded-full"></div>
+                <div class="w-1.5 h-7 bg-sky-400 rounded-full"></div>
+                <div class="w-1.5 h-8 bg-sky-500 rounded-full"></div>
+                <div class="w-1.5 h-6 bg-sky-300 rounded-full"></div>
+                <div class="w-1.5 h-7 bg-sky-400 rounded-full"></div>
+                <div class="w-1.5 h-6 bg-sky-300 rounded-full"></div>
+              </div>
+            </div>
+            <div class="h-[72px] p-2 rounded-xl bg-gradient-to-b from-amber-50 to-white border border-amber-100">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-slate-800">压力稳定性</span>
+                <span class="text-amber-600 font-semibold">↓</span>
+              </div>
+              <div class="mt-1 h-12 flex items-end gap-1">
+                <div class="w-1.5 h-8 bg-amber-400 rounded-full"></div>
+                <div class="w-1.5 h-6 bg-amber-300 rounded-full"></div>
+                <div class="w-1.5 h-5 bg-amber-200 rounded-full"></div>
+                <div class="w-1.5 h-4 bg-amber-200 rounded-full"></div>
+                <div class="w-1.5 h-6 bg-amber-300 rounded-full"></div>
+                <div class="w-1.5 h-3 bg-amber-200 rounded-full"></div>
+                <div class="w-1.5 h-4 bg-amber-200 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-3 shadow-[0_8px_22px_rgba(15,23,42,0.08)]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-solid fa-fire text-emerald-500 text-xs"></i>
+              <span class="text-xs font-semibold text-slate-800">异常事件统计</span>
+            </div>
+            <div class="flex items-center text-[10px] bg-slate-100 rounded-full px-1 py-0.5">
+              <span class="px-2 py-0.5 rounded-full bg-white text-slate-800 shadow">本周</span>
+              <span class="px-2 py-0.5 text-slate-500">本月</span>
+            </div>
+          </div>
+          <div class="space-y-2 text-[11px] text-slate-600">
+            <div class="flex items-center gap-2">
+              <span class="w-20 text-slate-700">温度超限</span>
+              <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="h-full bg-emerald-500" style="width:72%"></div>
+              </div>
+              <span class="w-8 text-right font-semibold text-slate-800">18</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-20 text-slate-700">电流波动</span>
+              <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="h-full bg-amber-500" style="width:58%"></div>
+              </div>
+              <span class="w-8 text-right font-semibold text-slate-800">14</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-20 text-slate-700">控制台读数不一致</span>
+              <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="h-full bg-rose-500" style="width:44%"></div>
+              </div>
+              <span class="w-8 text-right font-semibold text-slate-800">11</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-20 text-slate-700">图像识别失败</span>
+              <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="h-full bg-sky-500" style="width:36%"></div>
+              </div>
+              <span class="w-8 text-right font-semibold text-slate-800">9</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-20 text-slate-700">数据矛盾</span>
+              <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div class="h-full bg-slate-500" style="width:30%"></div>
+              </div>
+              <span class="w-8 text-right font-semibold text-slate-800">7</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -317,73 +461,6 @@
         <i class="fa-regular fa-user text-sm"></i>
         <span class="text-[11px]">我的</span>
       </a>
-    </div>
-  </div>
-
-  <!-- 看板统计配置弹层 -->
-  <div id="overviewFilterModal" class="absolute inset-0 bg-black/30 flex items-center justify-center px-4 z-20 hidden">
-    <div class="w-full max-w-xs rounded-3xl bg-white shadow-xl border border-emerald-100 p-4 text-[11px]">
-      <div class="flex items-center justify-between mb-2">
-        <div>
-          <div class="text-xs font-semibold text-slate-900">看板统计配置</div>
-          <div class="text-[10px] text-slate-500">按统计周期、车间、班次与值班人员过滤巡检数据。</div>
-        </div>
-        <button onclick="closeOverviewFilterModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
-          <i class="fa-solid fa-xmark text-[10px]"></i>
-        </button>
-      </div>
-      <div class="space-y-1.5 mb-2">
-        <div>
-          <label class="block mb-0.5 text-slate-600">统计周期</label>
-          <div class="grid grid-cols-4 gap-1.5">
-            <button class="px-2 py-1.5 rounded-xl bg-primary text-white text-[10px]">今日</button>
-            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700 text-[10px]">本周</button>
-            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700 text-[10px]">本月</button>
-            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700 text-[10px]">自定义</button>
-          </div>
-        </div>
-        <div>
-          <label class="block mb-0.5 text-slate-600">车间（按班次配置命名）</label>
-          <div class="grid grid-cols-2 gap-1.5">
-            <button class="px-2 py-1.5 rounded-xl bg-primarySoft text-primary">纺一车间 · 1#纺纱线</button>
-            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">纺一车间 · 2#纺纱线</button>
-            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">纺二车间 · 络筒线</button>
-            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">纺二车间 · 粗纺线</button>
-          </div>
-        </div>
-        <div>
-          <label class="block mb-0.5 text-slate-600">班次</label>
-          <div class="grid grid-cols-3 gap-1.5">
-            <button class="px-2 py-1.5 rounded-xl bg-primarySoft text-primary">白班</button>
-            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">中班</button>
-            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">夜班</button>
-          </div>
-        </div>
-        <div>
-          <label class="block mb-0.5 text-slate-600">值班人员</label>
-          <div onclick="toggleDutyDropdown()" class="h-8 rounded-xl border border-emerald-100 px-2 flex items-center justify-between cursor-pointer">
-            <span id="dutySelected" class="text-slate-500">全部值班人员</span>
-            <i class="fa-solid fa-chevron-down text-[9px] text-slate-400"></i>
-          </div>
-          <div id="dutyDropdown" class="mt-1 rounded-2xl border border-emerald-100 bg-white shadow-lg text-[11px] text-slate-700 hidden">
-            <button onclick="selectDuty('全部值班人员')" class="w-full text-left px-3 py-1.5 hover:bg-emerald-50">全部值班人员</button>
-            <button onclick="selectDuty('张三 · 白班')" class="w-full text-left px-3 py-1.5 hover:bg-emerald-50">张三 · 白班</button>
-            <button onclick="selectDuty('李四 · 中班')" class="w-full text-left px-3 py-1.5 hover:bg-emerald-50">李四 · 中班</button>
-            <button onclick="selectDuty('王五 · 夜班')" class="w-full text-left px-3 py-1.5 hover:bg-emerald-50">王五 · 夜班</button>
-          </div>
-        </div>
-      </div>
-      <div class="flex items-center justify-between">
-        <span class="text-[7px] text-slate-500"></span>
-        <div class="flex items-center gap-2">
-          <button onclick="closeOverviewFilterModal()" class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600">
-            取消
-          </button>
-          <button onclick="closeOverviewFilterModal()" class="px-3 py-1.5 rounded-full bg-primary text-white shadow-sm">
-            应用
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 </body>
