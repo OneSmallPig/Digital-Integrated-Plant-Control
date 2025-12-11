@@ -39,10 +39,10 @@
       </button>
       <div class="text-sm font-semibold text-slate-900">巡检表单 · 纺一车间 · 1#纺纱线</div>
       <div class="flex items-center gap-1">
-        <a href="inspection_form_prev.html" class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs active:scale-95" aria-label="上一个设备">
+        <a href="inspection_form.html" class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs active:scale-95" aria-label="上一个设备">
           <i class="fa-solid fa-arrow-left"></i>
         </a>
-        <a href="inspection_form_next.html" class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs active:scale-95" aria-label="下一个设备">
+        <a href="inspection_form.html" class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs active:scale-95" aria-label="下一个设备">
           <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
@@ -70,7 +70,7 @@
         </div>
         <div class="mt-2 flex items-center justify-between text-[11px] text-slate-600">
           <span>本班该工序需巡检机器：<span class="text-emerald-600 font-semibold">2</span> 台</span>
-          <span>当前机器：<span class="text-emerald-600 font-semibold">KQ-01-A</span></span>
+          <span>当前机器：<span class="text-emerald-600 font-semibold">KQ-00-A</span></span>
         </div>
       </div>
 
@@ -78,15 +78,15 @@
       <div class="bg-white rounded-2xl border border-emerald-100 p-3 space-y-2">
         <div class="flex items-center justify-between">
           <span class="text-xs font-medium text-slate-800">开清棉 · 机器选择</span>
-          <span class="text-[11px] text-slate-500">已完成 1 / 2 台</span>
+          <span class="text-[11px] text-slate-500">已完成 0 / 2 台</span>
         </div>
         <div class="flex items-center gap-1.5">
           <button class="flex-1 px-2 py-1.5 rounded-xl bg-primary text-white text-[11px] text-left">
-            <div>KQ-01-A · 1#开清棉机</div>
-            <div class="text-[10px] text-emerald-50/90">状态：录入中 · 指标 4/6</div>
+            <div>KQ-00-A · 开清棉机</div>
+            <div class="text-[10px] text-emerald-50/90">状态：未巡检 · 指标 0/6</div>
           </button>
           <button class="flex-1 px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-800 text-[11px] text-left">
-            <div>KQ-02-A · 2#开清棉机</div>
+            <div>KQ-01-A · 1#开清棉机</div>
             <div class="text-[10px] text-slate-500">状态：未巡检 · 指标 0/6</div>
           </button>
         </div>
@@ -95,7 +95,7 @@
       <!-- 指标表单 -->
       <div class="bg-white rounded-2xl border border-emerald-100">
         <div class="px-3 pt-3 pb-2 flex items-center justify-between">
-          <span class="text-xs font-medium text-slate-800">关键运行指标（开清棉 · KQ-01-A）</span>
+          <span class="text-xs font-medium text-slate-800">关键运行指标（开清棉 · KQ-00-A）</span>
           <span class="text-[11px] text-slate-500">必填 4 / 6</span>
         </div>
         <div class="divide-y divide-slate-100 text-[11px]">
@@ -105,7 +105,7 @@
               <div class="text-[10px] text-slate-500">合理范围：10 ~ 18 A</div>
             </div>
             <div class="flex items-center gap-1.5">
-              <input type="number" inputmode="decimal" class="w-16 h-8 rounded-lg border border-emerald-100 text-right px-1.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-primary" placeholder="--" value="15.2" />
+              <input type="number" inputmode="decimal" class="w-16 h-8 rounded-lg border border-emerald-100 text-right px-1.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-primary" placeholder="--" />
               <span class="text-slate-500">A</span>
             </div>
           </div>
@@ -125,7 +125,7 @@
               <div class="text-[10px] text-slate-500">合理范围：85% ~ 95%</div>
             </div>
             <div class="flex items-center gap-1.5">
-              <input type="number" inputmode="decimal" class="w-16 h-8 rounded-lg border border-emerald-100 text-right px-1.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-primary" placeholder="--" value="89.5" />
+              <input type="number" inputmode="decimal" class="w-16 h-8 rounded-lg border border-emerald-100 text-right px-1.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-primary" placeholder="--" />
               <span class="text-slate-500">%</span>
             </div>
           </div>
@@ -146,7 +146,7 @@
               <div class="text-[10px] text-slate-500">防护罩、防护门、急停按钮状态</div>
             </div>
             <label class="inline-flex items-center cursor-pointer">
-              <input type="checkbox" class="sr-only peer" checked />
+              <input type="checkbox" class="sr-only peer" />
               <div class="w-9 h-5 bg-slate-200 peer-checked:bg-primary rounded-full relative transition">
                 <div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow-sm peer-checked:translate-x-4 transition"></div>
               </div>
