@@ -64,6 +64,17 @@
         tip.classList.add('hidden');
       }, 1500);
     }
+    function saveUserPermission() {
+      // 先关闭配置弹层
+      closeUserPermissionModal();
+      // 再显示保存成功提示弹层
+      var modal = document.getElementById('userPermissionSuccessModal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      setTimeout(function () {
+        modal.classList.add('hidden');
+      }, 1500);
+    }
   </script>
 </head>
 <body class="bg-slate-100 flex items-center justify-center min-h-screen">
@@ -352,7 +363,7 @@
         <button onclick="closeUserPermissionModal()" class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600">
           取消
         </button>
-        <button onclick="closeUserPermissionModal()" class="px-3 py-1.5 rounded-full bg-primary text-white shadow-sm">
+        <button onclick="saveUserPermission()" class="px-3 py-1.5 rounded-full bg-primary text-white shadow-sm">
           保存
         </button>
       </div>
@@ -396,6 +407,14 @@
           复制链接
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- 用户权限保存成功提示弹层 -->
+  <div id="userPermissionSuccessModal" class="absolute inset-0 bg-black/0 flex items-center justify-center px-4 z-30 hidden">
+    <div class="px-3 py-1.5 rounded-full bg-emerald-500 text-white text-[11px] shadow-md flex items-center gap-1.5">
+      <i class="fa-solid fa-check-circle text-[12px]"></i>
+      <span>保存成功，用户权限已更新。</span>
     </div>
   </div>
 </body>

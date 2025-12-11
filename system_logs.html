@@ -38,26 +38,13 @@
         <i class="fa-solid fa-chevron-left"></i>
       </button>
       <div class="text-sm font-semibold text-slate-900">系统日志与告警</div>
-      <button class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs">
+      <button onclick="openLogFilterModal()" class="w-8 h-8 rounded-full bg-white/80 border border-emerald-100 flex items-center justify-center text-slate-600 text-xs" aria-label="日志筛选">
         <i class="fa-solid fa-filter"></i>
       </button>
     </div>
 
     <!-- 内容区 -->
     <div class="flex-1 overflow-y-auto px-4 pb-20 bg-gradient-to-b from-emerald-50/80 to-white space-y-3">
-      <!-- 日志类型筛选 -->
-      <div class="bg-white rounded-2xl border border-emerald-100 p-3">
-        <div class="text-[11px] text-slate-600 mb-2">日志类型</div>
-        <div class="grid grid-cols-4 gap-2 text-[11px]">
-          <button class="px-2 py-1.5 rounded-xl bg-primary text-white">全部</button>
-          <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">登录</button>
-          <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">数据录入</button>
-          <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">权限变更</button>
-          <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">告警</button>
-          <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">大模型</button>
-        </div>
-      </div>
-
       <!-- 日志列表 -->
       <div class="space-y-2 text-[11px]">
         <div class="bg-white rounded-2xl border border-emerald-100 p-3">
@@ -130,5 +117,52 @@
       </a>
     </div>
   </div>
+
+  <!-- 日志筛选弹层 -->
+  <div id="logFilterModal" class="absolute inset-0 bg-black/30 flex items-center justify-center px-4 z-20 hidden">
+    <div class="w-full max-w-xs rounded-3xl bg-white shadow-xl border border-emerald-100 p-4 text-[11px]">
+      <div class="flex items-center justify-between mb-2">
+        <div>
+          <div class="text-xs font-semibold text-slate-900">日志筛选</div>
+          <div class="text-[10px] text-slate-500">按日志类型过滤系统日志记录，仅影响当前列表展示。</div>
+        </div>
+        <button onclick="closeLogFilterModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+          <i class="fa-solid fa-xmark text-[10px]"></i>
+        </button>
+      </div>
+      <div class="space-y-1.5 mb-2">
+        <div>
+          <div class="text-[11px] text-slate-600 mb-1">日志类型</div>
+          <div class="grid grid-cols-3 gap-1.5 text-[10px]">
+            <button class="px-2 py-1.5 rounded-xl bg-primary text-white">全部</button>
+            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">登录</button>
+            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">数据录入</button>
+            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">权限变更</button>
+            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">告警</button>
+            <button class="px-2 py-1.5 rounded-xl bg-emerald-50 text-slate-700">大模型</button>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2">
+        <button onclick="closeLogFilterModal()" class="px-3 py-1.5 rounded-full border border-slate-200 text-slate-600">
+          取消
+        </button>
+        <button onclick="closeLogFilterModal()" class="px-3 py-1.5 rounded-full bg-primary text-white shadow-sm">
+          应用
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openLogFilterModal() {
+      var modal = document.getElementById('logFilterModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+    function closeLogFilterModal() {
+      var modal = document.getElementById('logFilterModal');
+      if (modal) modal.classList.add('hidden');
+    }
+  </script>
 </body>
 </html>
