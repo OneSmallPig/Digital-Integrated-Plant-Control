@@ -39,7 +39,7 @@
           <div class="text-[11px] text-slate-500 mb-0.5">欢迎回来</div>
           <div class="flex items-center gap-2">
             <h1 class="text-base font-semibold text-slate-900">彩诗禾-厂区总览</h1>
-            <span class="text-[11px] px-2 py-0.5 rounded-full bg-primarySoft text-primary">今日白班</span>
+            <span style="visibility: hidden;" class="text-[11px] px-2 py-0.5 rounded-full bg-primarySoft text-primary">今日白班</span>
           </div>
         </div>
         <div class="flex items-center gap-3">
@@ -59,17 +59,39 @@
       <div class="grid grid-cols-2 gap-2">
         <div class="col-span-1 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl p-3 text-white shadow-lg">
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs opacity-80">生产线巡检完成率</span>
+            <span class="text-xs opacity-80">当日巡检任务进度</span>
             <i class="fa-solid fa-gauge-high text-xs opacity-80"></i>
           </div>
-          <div class="flex items-end justify-between">
-            <div>
-              <div class="text-2xl font-semibold leading-none mb-1">86%</div>
-              <div class="text-[11px] opacity-80">今日已完成 24 / 28 条线</div>
+          <div class="flex items-center gap-3 mb-2">
+            <div class="relative w-16 h-16">
+              <svg viewBox="0 0 36 36" class="w-16 h-16 -rotate-90">
+                <path d="M18 2.0845
+                         a 15.9155 15.9155 0 0 1 0 31.831
+                         a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="3"/>
+                <path d="M18 2.0845
+                         a 15.9155 15.9155 0 0 1 0 31.831"
+                      fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="3"
+                      stroke-dasharray="86,100" stroke-linecap="round"/>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center flex-col text-white">
+                <span class="text-base font-semibold leading-none">86%</span>
+                <span class="text-[9px] opacity-80">今日</span>
+              </div>
             </div>
-            <div class="flex flex-col items-end gap-1">
-              <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-white/15">异常 2 条</span>
-              <span class="text-[10px] opacity-90">目标 ≥ 95%</span>
+            <div class="flex-1 text-[11px] space-y-1">
+              <div class="flex items-center justify-between opacity-90">
+                <span>完成 / 总计</span>
+                <span class="font-semibold">24 / 28 班次</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-1 text-[10px] mt-1 opacity-90">
+            <div class="bg-white/10 rounded-xl px-2 py-1 flex items-center justify-between">
+              <span>待检</span><span class="font-semibold">3</span>
+            </div>
+            <div class="bg-white/10 rounded-xl px-2 py-1 flex items-center justify-between">
+              <span>巡检中</span><span class="font-semibold">1</span>
             </div>
           </div>
         </div>
